@@ -20,9 +20,11 @@ jobs:
           set -euo pipefail
           [ -n "$TOKEN" ] || { echo "GOATCOUNTER_TOKEN not set yet"; exit 0; }
           now="$(date -u +%Y-%m-%dT%H:00:00Z)"
-          curl -sf -H "Authorization: Bearer $TOKEN" \
-            "https://whatwouldaussiedo.goatcounter.com/api/v0/stats/locations?start=2026-10-31T00:00:00Z&end=$now&limit=6" \
-            | jq '{locations: [.stats[] | {code: .id, name: .name, count: .count}]}' > stats.json.new
+          code="$(curl -s -o raw.json -w '%{http_code}' -H "Authorization: Bearer $TOKEN" \
+            "https://whatwouldaussiedo.goatcounter.com/api/v0/stats/locations?start=2026-10-31T00:00:00Z&end=$now&limit=6")"
+          [ "$code" = 200 ] || { echo "GoatCounter answered $code:"; cat raw.json; exit 1; }
+          jq '{locations: [.stats[] | {code: .id, name: .name, count: .count}]}' raw.json > stats.json.new
+          rm raw.json
           jq -e '.locations | type == "array"' stats.json.new > /dev/null
           mv stats.json.new stats.json
       - name: Save if changed
