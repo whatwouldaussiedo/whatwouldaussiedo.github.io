@@ -1,14 +1,14 @@
 {
   "locations": [
     {
-      "code": "GB",
-      "name": "United Kingdom",
-      "count": 15
-    },
-    {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 15
+      "count": 18
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "count": 17
     },
     {
       "code": "US",
