@@ -1,5 +1,7 @@
-# Every hour, copy where visitors come from (countries only) out of GoatCounter
-# into stats.json, which the title page shows. The read-only GoatCounter token
+# Every hour, copy the visit and game counts and where visitors come from
+# (countries only) out of GoatCounter into stats.json, which the title page shows.
+# The page reads them from its own site, so a browser that blocks GoatCounter
+# still sees them. The read-only GoatCounter token
 # lives in the repo secret GOATCOUNTER_TOKEN and never reaches the page.
 name: Visitor locations
 on:
@@ -23,7 +25,10 @@ jobs:
           code="$(curl -s -o raw.json -w '%{http_code}' -H "Authorization: Bearer $TOKEN" \
             "https://whatwouldaussiedo.goatcounter.com/api/v0/stats/locations?start=2026-10-31T00:00:00Z&end=$now&limit=6")"
           [ "$code" = 200 ] || { echo "GoatCounter answered $code:"; cat raw.json; exit 1; }
-          jq '{locations: [.stats[] | {code: .id, name: .name, count: .count}]}' raw.json > stats.json.new
+          count() { curl -sf "https://whatwouldaussiedo.goatcounter.com/counter/$1.json" | jq -r '.count // empty' || true; }
+          visits="$(count %2F)"; started="$(count started)"; finished="$(count finished)"
+          jq --arg v "$visits" --arg s "$started" --arg f "$finished" \
+            '{visits: $v, started: $s, finished: $f, locations: [.stats[] | {code: .id, name: .name, count: .count}]}' raw.json > stats.json.new
           rm raw.json
           jq -e '.locations | type == "array"' stats.json.new > /dev/null
           mv stats.json.new stats.json
