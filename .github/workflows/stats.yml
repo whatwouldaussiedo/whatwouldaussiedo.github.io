@@ -1,0 +1,34 @@
+# Every hour, copy where visitors come from (countries only) out of GoatCounter
+# into stats.json, which the title page shows. The read-only GoatCounter token
+# lives in the repo secret GOATCOUNTER_TOKEN and never reaches the page.
+name: Visitor locations
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  locations:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch countries
+        env:
+          TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+        run: |
+          set -euo pipefail
+          [ -n "$TOKEN" ] || { echo "GOATCOUNTER_TOKEN not set yet"; exit 0; }
+          now="$(date -u +%Y-%m-%dT%H:00:00Z)"
+          curl -sf -H "Authorization: Bearer $TOKEN" \
+            "https://whatwouldaussiedo.goatcounter.com/api/v0/stats/locations?start=2026-10-31T00:00:00Z&end=$now&limit=6" \
+            | jq '{locations: [.stats[] | {code: .id, name: .name, count: .count}]}' > stats.json.new
+          jq -e '.locations | type == "array"' stats.json.new > /dev/null
+          mv stats.json.new stats.json
+      - name: Save if changed
+        run: |
+          [ -f stats.json ] || exit 0
+          git add stats.json
+          git diff --cached --quiet && exit 0
+          git -c user.name=whatwouldaussiedo -c user.email=whatwouldaussiedo@users.noreply.github.com commit -q -m "Update visitor locations"
+          git push -q
