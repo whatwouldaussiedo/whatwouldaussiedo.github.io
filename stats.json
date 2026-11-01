@@ -6,13 +6,18 @@
       "count": 5
     },
     {
+      "code": "HK",
+      "name": "Hong Kong",
+      "count": 5
+    },
+    {
       "code": "US",
       "name": "United States",
       "count": 4
     },
     {
-      "code": "HK",
-      "name": "Hong Kong",
+      "code": "TW",
+      "name": "Taiwan",
       "count": 2
     },
     {
@@ -23,11 +28,6 @@
     {
       "code": "BY",
       "name": "Belarus",
-      "count": 1
-    },
-    {
-      "code": "CA",
-      "name": "Canada",
       "count": 1
     }
   ]
