@@ -1,9 +1,12 @@
 {
+  "visits": "32",
+  "started": "13",
+  "finished": "1",
   "locations": [
     {
       "code": "GB",
       "name": "United Kingdom",
-      "count": 19
+      "count": 20
     },
     {
       "code": "HK",
