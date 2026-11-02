@@ -6,32 +6,32 @@
     {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 123
+      "count": 162
     },
     {
       "code": "GB",
       "name": "United Kingdom",
-      "count": 33
+      "count": 41
     },
     {
       "code": "TW",
       "name": "Taiwan",
-      "count": 19
+      "count": 25
     },
     {
       "code": "AU",
       "name": "Australia",
-      "count": 16
+      "count": 17
+    },
+    {
+      "code": "MO",
+      "name": "Macao",
+      "count": 10
     },
     {
       "code": "US",
       "name": "United States",
       "count": 5
-    },
-    {
-      "code": "DE",
-      "name": "Germany",
-      "count": 3
     }
   ]
 }
