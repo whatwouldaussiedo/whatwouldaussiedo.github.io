@@ -6,12 +6,17 @@
     {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 34
+      "count": 62
     },
     {
       "code": "GB",
       "name": "United Kingdom",
-      "count": 24
+      "count": 33
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "count": 9
     },
     {
       "code": "US",
@@ -21,17 +26,12 @@
     {
       "code": "TW",
       "name": "Taiwan",
+      "count": 3
+    },
+    {
+      "code": "FR",
+      "name": "France",
       "count": 2
-    },
-    {
-      "code": "AD",
-      "name": "Andorra",
-      "count": 1
-    },
-    {
-      "code": "BY",
-      "name": "Belarus",
-      "count": 1
     }
   ]
 }
