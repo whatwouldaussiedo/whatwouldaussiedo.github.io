@@ -25,8 +25,19 @@ jobs:
           code="$(curl -s -o raw.json -w '%{http_code}' -H "Authorization: Bearer $TOKEN" \
             "https://whatwouldaussiedo.goatcounter.com/api/v0/stats/locations?start=2026-10-31T00:00:00Z&end=$now&limit=6")"
           [ "$code" = 200 ] || { echo "GoatCounter answered $code:"; cat raw.json; exit 1; }
-          count() { curl -sf "https://whatwouldaussiedo.goatcounter.com/counter/$1.json" | jq -r '.count // empty' || true; }
-          visits="$(count %2F)"; started="$(count started)"; finished="$(count finished)"
+          # Counts per page and event from the API (the public counter can lag for hours);
+          # the public counter only if the API does not answer.
+          curl -s -o hits.json -H "Authorization: Bearer $TOKEN" \
+            "https://whatwouldaussiedo.goatcounter.com/api/v0/stats/hits?start=2026-10-31T00:00:00Z&end=$now&limit=100" || true
+          jq -r '.hits[]? | "\(.count)\t\(.path)"' hits.json 2>/dev/null | head -12 || true
+          count() {
+            local n; n="$(jq -r --arg p "$1" '[.hits[]? | select(.path == $p) | .count] | add // empty' hits.json 2>/dev/null || true)"
+            [ -n "$n" ] || n="$(curl -sf "https://whatwouldaussiedo.goatcounter.com/counter/$2.json" | jq -r '.count // empty' || true)"
+            echo "$n"
+          }
+          visits="$(count / %2F)"; started="$(count started started)"; finished="$(count finished finished)"
+          rm -f hits.json
+          echo "visits $visits, started $started, finished $finished"
           jq --arg v "$visits" --arg s "$started" --arg f "$finished" \
             '{visits: $v, started: $s, finished: $f, locations: [.stats[] | {code: .id, name: .name, count: .count}]}' raw.json > stats.json.new
           rm raw.json
