@@ -6,7 +6,7 @@
     {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 62
+      "count": 90
     },
     {
       "code": "GB",
@@ -16,22 +16,22 @@
     {
       "code": "AU",
       "name": "Australia",
-      "count": 9
-    },
-    {
-      "code": "US",
-      "name": "United States",
-      "count": 4
+      "count": 11
     },
     {
       "code": "TW",
       "name": "Taiwan",
-      "count": 3
+      "count": 11
     },
     {
-      "code": "FR",
-      "name": "France",
-      "count": 2
+      "code": "US",
+      "name": "United States",
+      "count": 5
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "count": 3
     }
   ]
 }
