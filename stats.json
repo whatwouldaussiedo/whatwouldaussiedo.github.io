@@ -1,12 +1,17 @@
 {
-  "visits": "858",
-  "started": "479",
-  "finished": "116",
+  "visits": "940",
+  "started": "526",
+  "finished": "129",
   "locations": [
     {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 1039
+      "count": 1155
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "count": 153
     },
     {
       "code": "GB",
@@ -14,24 +19,19 @@
       "count": 142
     },
     {
-      "code": "TW",
-      "name": "Taiwan",
-      "count": 123
-    },
-    {
       "code": "AU",
       "name": "Australia",
-      "count": 87
+      "count": 89
     },
     {
       "code": "MO",
       "name": "Macao",
-      "count": 49
+      "count": 50
     },
     {
       "code": "CA",
       "name": "Canada",
-      "count": 37
+      "count": 40
     }
   ]
 }
