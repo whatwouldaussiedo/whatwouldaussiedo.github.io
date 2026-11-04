@@ -1,22 +1,22 @@
 {
-  "visits": "1060",
-  "started": "578",
-  "finished": "152",
+  "visits": "1083",
+  "started": "591",
+  "finished": "155",
   "locations": [
     {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 1423
-    },
-    {
-      "code": "TW",
-      "name": "Taiwan",
-      "count": 183
+      "count": 1476
     },
     {
       "code": "GB",
       "name": "United Kingdom",
-      "count": 182
+      "count": 190
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "count": 187
     },
     {
       "code": "AU",
