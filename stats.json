@@ -1,6 +1,6 @@
 {
-  "visits": "1337",
-  "started": "709",
+  "visits": "1338",
+  "started": "713",
   "finished": "195",
   "locations": [
     {
@@ -16,7 +16,7 @@
     {
       "code": "GB",
       "name": "United Kingdom",
-      "count": 242
+      "count": 245
     },
     {
       "code": "AU",
@@ -26,7 +26,7 @@
     {
       "code": "CA",
       "name": "Canada",
-      "count": 75
+      "count": 79
     },
     {
       "code": "JP",
