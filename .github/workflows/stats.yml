@@ -22,9 +22,18 @@ jobs:
           set -euo pipefail
           [ -n "$TOKEN" ] || { echo "GOATCOUNTER_TOKEN not set yet"; exit 0; }
           now="$(date -u +%Y-%m-%dT%H:00:00Z)"
-          code="$(curl -s -o raw.json -w '%{http_code}' -H "Authorization: Bearer $TOKEN" \
-            "https://whatwouldaussiedo.goatcounter.com/api/v0/stats/locations?start=2026-10-31T00:00:00Z&end=$now&limit=6")"
-          [ "$code" = 200 ] || { echo "GoatCounter answered $code:"; cat raw.json; exit 1; }
+          # GoatCounter now and then answers 404 for an hour: try three times, then keep
+          # the last stats.json (a warning, not a failure, so no email every few hours).
+          for try in 1 2 3; do
+            code="$(curl -s -o raw.json -w '%{http_code}' -H "Authorization: Bearer $TOKEN" \
+              "https://whatwouldaussiedo.goatcounter.com/api/v0/stats/locations?start=2026-10-31T00:00:00Z&end=$now&limit=6")"
+            [ "$code" = 200 ] && break
+            sleep 20
+          done
+          if [ "$code" != 200 ]; then
+            echo "::warning::GoatCounter answered $code three times; keeping the last stats.json"
+            head -c 300 raw.json; rm -f raw.json; exit 0
+          fi
           # Counts per page and event from the API (the public counter can lag for hours);
           # the public counter only if the API does not answer.
           curl -s -o hits.json -H "Authorization: Bearer $TOKEN" \
