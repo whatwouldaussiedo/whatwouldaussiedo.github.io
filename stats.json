@@ -1,6 +1,6 @@
 {
-  "visits": "1638",
-  "started": "831",
+  "visits": "1642",
+  "started": "832",
   "finished": "227",
   "locations": [
     {
@@ -11,12 +11,12 @@
     {
       "code": "TW",
       "name": "Taiwan",
-      "count": 377
+      "count": 384
     },
     {
       "code": "GB",
       "name": "United Kingdom",
-      "count": 354
+      "count": 355
     },
     {
       "code": "AU",
