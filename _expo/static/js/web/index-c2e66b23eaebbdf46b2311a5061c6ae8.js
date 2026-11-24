@@ -113,4 +113,4 @@ function U(n=(0,e.getApp)(),o=b){const s=(0,e._getProvider)((0,t.getModularInsta
    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    * See the License for the specific language governing permissions and
    * limitations under the License.
-   */var q;(0,e._registerComponent)(new n.Component(p,(e,{instanceIdentifier:t})=>{const n=e.getProvider('app').getImmediate(),o=e.getProvider("auth-internal"),s=e.getProvider("messaging-internal"),c=e.getProvider("app-check-internal");return new A(n,o,s,c,t)},"PUBLIC").setMultipleInstances(!0)),(0,e.registerVersion)($,x,q),(0,e.registerVersion)($,x,'esm2020')},472,[393,395,394]);
+   */var q;(0,e._registerComponent)(new n.Component(p,(e,{instanceIdentifier:t})=>{const n=e.getProvider('app').getImmediate(),o=e.getProvider("auth-internal"),s=e.getProvider("messaging-internal"),c=e.getProvider("app-check-internal");return new A(n,o,s,c,t)},"PUBLIC").setMultipleInstances(!0)),(0,e.registerVersion)($,x,q),(0,e.registerVersion)($,x,'esm2020')},472,[395,397,396]);
